@@ -6,14 +6,14 @@
 #    By: cyferrei <cyferrei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/19 00:41:16 by cyferrei          #+#    #+#              #
-#    Updated: 2024/12/19 00:41:32 by cyferrei         ###   ########.fr        #
+#    Updated: 2024/12/19 00:59:22 by cyferrei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = Iter
 RM = rm -rf
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g3
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 SRC = main.cpp
 
 OBJ= $(SRC:.cpp=.o)
