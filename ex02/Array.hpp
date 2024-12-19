@@ -6,7 +6,7 @@
 /*   By: cyferrei <cyferrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 00:59:34 by cyferrei          #+#    #+#             */
-/*   Updated: 2024/12/19 01:14:11 by cyferrei         ###   ########.fr       */
+/*   Updated: 2024/12/19 14:25:39 by cyferrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,14 @@ class Array {
 
 	public:
 		Array() : _arr(0), _size(0) {}
+		
 		Array(unsigned int size) : _arr(new T[size]()), _size(size) {}
-		Array(const Array &other) : _arr(new T[other._size]), _size(other.size) {
+		
+		Array(const Array &other) : _arr(new T[other._size]), _size(other.size()) {
 			for (unsigned int i = 0; i < _size; i++)
 				_arr[i] = other._arr[i];
 		}
+		
 		Array &operator=(const Array &other) {
 			if (this != &other) {
 				delete [] _arr;
@@ -39,9 +42,31 @@ class Array {
 			}
 			return (*this);
 		}
+		
 		~Array() {
 			delete[] _arr;
 		}
+
+		unsigned int size()const {
+			return (this->_size);
+		}
+
+		T &operator[](unsigned int idx) {
+			if (idx >= this->_size || this->_arr == NULL) {
+				std::cout << "[idx]: " << idx << std::endl;
+				throw Array<T>::WrongIdxExecption();
+			}
+			return (this->_arr[idx]);
+		}
+
+		class WrongIdxExecption : public std::exception {
+			public:
+				virtual const char *what()const throw();
+		};
 };
 
+template <typename T>
+const char *Array<T>::WrongIdxExecption::what()const throw() {
+	return ("Error: Wrong index!");
+}
 #endif
